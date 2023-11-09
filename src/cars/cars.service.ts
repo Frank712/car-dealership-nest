@@ -14,7 +14,7 @@ export class CarsService {
     return this.cars;
   }
 
-  findCarById(id: string) {
+  findOneById(id: string) {
     const car = this.cars.find((c) => c.id === id);
     return car;
   }

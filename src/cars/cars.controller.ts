@@ -30,13 +30,12 @@ export class CarsController {
   getCarById(@Param('id', ParseUUIDPipe) id: string) {
     console.log({ id });
     const car = this.carsService.findOneById(id);
-    if (!car) throw new NotFoundException(`Car with id '${id}' not found`);
     return car;
   }
 
   @Post()
   createCar(@Body() createCarDto: CreateCarDto) {
-    return this.carsService.createCar(createCarDto);
+    return this.carsService.create(createCarDto);
   }
 
   @Patch(':id')
@@ -48,10 +47,7 @@ export class CarsController {
   }
 
   @Delete(':id')
-  deleteCar(@Param('id') id: string) {
-    return {
-      method: 'DELETE',
-      id: id,
-    };
+  deleteCar(@Param('id', ParseUUIDPipe) id: string) {
+    return this.carsService.delete(id);
   }
 }
